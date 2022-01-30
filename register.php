@@ -17,17 +17,21 @@ require_once("includes/classes/Account.php");
         $password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
 
 
-        $account->register($firstName, $lastName, $username, $email, $email2, $password, $password2);
+        $success = $account->register($firstName, $lastName, $username, $email, $email2, $password, $password2);
+
+        if($success) {
+            $_SESSION["userLoggedin"] = $username;
+            header("Location: index.php");
+        }
     }
 
-    
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Welcom to Reidflix</title>
+    <title>Welcome to Reidflix</title>
     <link rel="stylesheet" type="text/css" href="assets/style/style.css" />
 </head>
 
